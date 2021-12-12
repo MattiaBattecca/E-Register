@@ -1,0 +1,111 @@
+body{
+    font-family: sans-serif;
+    background-color: crimson;
+    padding: 5%;
+    padding-top: 2.5%;
+}
+
+head{
+    background-color: crimson;
+}
+
+h1{
+    text-align: center;
+    color: crimson;
+    font-size: 3em;
+    
+}
+h2{
+    font-size: 2em;
+    padding-bottom: .5em;
+}
+
+hr{
+    max-width: 90%;
+}
+
+p{
+    padding-bottom: 10px;
+}
+
+.main{
+    background-color: white;
+    border: 10%;
+    border-radius: 20px;
+}
+
+.nav{
+    padding-right: 4em;
+    padding-bottom: 3em;
+    text-align: right;
+}
+
+.btn{
+    border: black 1px;
+    background-color: rgb(206, 42, 75);
+    border-radius: 10px;
+    padding: 1%;
+    color: white;
+    text-decoration: none;
+    margin-top: .0em;
+    margin-bottom: .0em;
+    margin-left: .5em;
+    font-size: 1.5em ;
+}
+
+
+
+
+.container{
+    background-color: whitesmoke;
+    margin: 5%;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+.fixed{
+    top: 0;
+    bottom:0;
+    position:sticky;
+}
+
+.footer{
+    text-align: center;
+    padding: .2em;
+}
+
+table, th, td {
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    border-collapse: collapse;
+  }
+
+  th,td{
+      padding: .2em;
+      text-align: center;
+      font-size: 1.5em;
+  }
+
+  table{
+      width: 90%;
+      margin: auto;
+  }
+
+input{
+    width: 75%;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 4px;
+}
+
+button{
+    width: 10%;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 4px;
+}
+
+.tools{
+    margin: 2em;
+    margin-left:3em;
+}
