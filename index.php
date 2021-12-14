@@ -11,37 +11,60 @@ include('dal.php');
     </form>
 </div>
 
+<?php 
+
+$arr=mesi();
+
+
+?>
+
 <div class="container" id="Andamento">
-    <h2>Andamento Classi</h2>
+    <h2>Andamento Classi - Voto</h2>
+
+    <p>
+        <canvas id="myChart" style="width:100%;"></canvas>
+
+        <script>
+            var xValues = ["SET","OTT","NOV","DIC","GEN","FEB","MAR","APR","MAG","GIU"];
+
+            new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{ 
+                data: [<?php
+                foreach ($arr as $a ) {
+                    echo($a.",");
+                }?>],
+                borderColor: "red",
+                fill: false
+                }]
+            },
+            options: {
+                legend: {display: false}
+            }
+            });
+        </script>
+    </p>
+    
 </div>
 
 <div class="container" id="Voti">
-    <h2>Voti Classi</h2>
+    <h2>Statistiche generali</h2>
     <table>
         <tr>
-            <th>Classe</th>
             <th>Media</th>
-            <th>Max</th>
-            <th>Min</th>
+            <th>Massimo</th>
+            <th>Minimo</th>
+            <th>Deviazione</th>
         </tr>
-        <?php
-        $classi = classi_sel_all();
-        foreach ($classi as $c) {
-        ?>
 
         <tr>
-            <td>
-
-        <?php
-            echo($c['numero'].$c['sezione']);
-            }
-        ?>
-        </td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td class="voto"><?=number_format(media_tot()[0],2);?></td>
+            <td class="voto"><?=number_format(massimo_tot()[0],2);?></td>
+            <td class="voto"><?=number_format(minimo_tot()[0],2);?></td>
+            <td class="voto"><?=number_format(deviazione_tot()[0],2);?></td>
         </tr>
-
 
     </table>
 </div>
