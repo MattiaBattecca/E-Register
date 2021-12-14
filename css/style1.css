@@ -18,6 +18,7 @@ h1{
 h2{
     font-size: 2em;
     padding-bottom: .5em;
+    color:  rgb(42, 94, 206);
 }
 
 hr{
@@ -42,7 +43,7 @@ p{
 
 .btn{
     border: black 1px;
-    background-color: rgb(206, 42, 75);
+    background-color: rgb(42, 94, 206);
     border-radius: 10px;
     padding: 1%;
     color: white;
@@ -71,7 +72,8 @@ p{
 
 .footer{
     text-align: center;
-    padding: .2em;
+    padding: 2em;
+    font-size: 20px;
 }
 
 table, th, td {
@@ -91,6 +93,10 @@ table, th, td {
       margin: auto;
   }
 
+.voto{
+    font-size: 4em;
+}
+
 input{
     width: 75%;
     padding: 1em;
@@ -108,4 +114,15 @@ button{
 .tools{
     margin: 2em;
     margin-left:3em;
+}
+
+.centered{
+    text-align: center;
+    margin: auto;
+}
+
+.intestazione{
+    padding: 1em;
+    text-align: center;
+    font-size: 2.5em;
 }

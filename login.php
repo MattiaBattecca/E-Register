@@ -5,7 +5,7 @@ include('dal.php');
 ?>
 
 
-<div class="container" id="Cerca">
+<div class="container centered" id="Cerca">
     <h2>Log-in</h2>
 <form method="post" action="login_act.php">
 <p> 
@@ -15,7 +15,7 @@ include('dal.php');
     <p> 
     <label>Password</label><br>
     <input name="password" id="password" placeholder="Inserisci la tua password..." type="password"><br></p> 
-    <button type="submit">Entra con le credenziali</button>
+    <p><p><a href="index.php" class="btn">Entra con le credenziali</a></p> </p> 
 </form>
 </div>
 

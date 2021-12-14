@@ -1,4 +1,4 @@
-<div class="footer">
+        <div class="footer">
             &copy; Copyright 2021 - ClasseVirtuale
         </div>
     </div>

@@ -3,23 +3,22 @@ include('template_header_pub.php');
 include('dal.php');
 ?>
 
-<div class="container" id="Cerca">
+<p class="intestazione">Scuola ISII Marconi</p>
+
+<div class="container" id="cerca_classe">
     <h2>Cerca una classe</h2>
-    <form method="get" action="cerca.php">
+    <form method="get" action="cerca_act.php">
         <input name="classe" id="classe" placeholder="Cerca una classe...">
         <button type="submit">Cerca</button>
     </form>
 </div>
 
 <?php 
-
 $arr=mesi();
-
-
 ?>
 
 <div class="container" id="Andamento">
-    <h2>Andamento Classi - Voto</h2>
+    <h2>Andamento annuale</h2>
 
     <p>
         <canvas id="myChart" style="width:100%;"></canvas>
