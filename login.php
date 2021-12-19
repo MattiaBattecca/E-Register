@@ -1,5 +1,5 @@
 <?php
-include('template_header.php');
+include('template/template_header.php');
 include('dal.php');
 
 ?>
@@ -15,12 +15,12 @@ include('dal.php');
     <p> 
     <label>Password</label><br>
     <input name="password" id="password" placeholder="Inserisci la tua password..." type="password"><br></p> 
-    <p><p><a href="index.php" class="btn">Entra con le credenziali</a></p> </p> 
+    <p><p><input type="submit" class="btn" value="Entra con le credenziali"></p> </p> 
 </form>
 </div>
 
 
 <?php
-include('template_footer.php');
+include('template/template_footer.php');
 
 ?>

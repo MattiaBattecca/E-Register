@@ -1,7 +1,7 @@
 
 
 <?php
-//connessione
+// ---------------------------------- CONNESSIONE ----------------------------------
 function db_connect(){
   $mysqli = new mysqli("localhost", "registro", "4Uu4eK0mE7amLwPi", "registro");
   if($mysqli->connect_error){
@@ -10,44 +10,7 @@ function db_connect(){
   return $mysqli;
 }
 
-function classi_sel_all(){
-  $mysqli=db_connect();
-  $sql="SELECT * FROM classe ";
-  $result=$mysqli->query($sql);
-  $data=$result->fetch_all(MYSQLI_ASSOC);
-  $result->free();
-  $mysqli->close();
-  return $data;
-}
-
-function log_insegnante($user, $pass){
-    
-  $mysqli=db_connect();
-  $sql="SELECT 'password', id_insegnante FROM insegnante WHERE LOWER(username) LIKE LOWER('$user')";
-  $result=$mysqli->query($sql);
-  $data=$result->fetch_all(MYSQLI_ASSOC);
-  $result->free();
-  $mysqli->close();
-
-    if($data!=null)
-    {
-        echo(implode("|",$data[0][0]));
-        echo(implode("|",$data[0][1]));
-        echo("\n\n\n\n");
-        if($pass==$data[0])
-        {
-            return $data[1];
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
-        return 0;
-    }
-}
+// ---------------------------------- MATEMATICA ----------------------------------
 
 function media_tot(){
   $mysqli=db_connect();
@@ -129,27 +92,7 @@ function deviazione_cls($classe){
   return $data[0][0];
 }
 
-
-function log_studente($user, $pass){
-    
-  $mysqli=db_connect();
-  $sql="SELECT 'password', id_studente FROM studente WHERE LOWER(username) LIKE LOWER('$user') ";
-  $result=$mysqli->query($sql);
-  $data=$result->fetch_all(MYSQLI_ASSOC);
-  $result->free();
-  $mysqli->close();
-
-  if($data!=null)
-  {
-    if($pass==$data[0][0])
-    {
-        return $data[0][1];
-    }
-  }
-  else{
-      return 0;
-  }
-}
+// ---------------------------------- GRAFICO ----------------------------------
 
 function mesi(){
   $arr=[];
@@ -303,8 +246,69 @@ function mesi_cls($classe){
   return $arr;
 }
 
+// ---------------------------------- LOGIN ----------------------------------
 
-function classe($str){  
+function log_insegnante($user, $pass){
+    
+  $mysqli=db_connect();
+  $sql="SELECT insegnante.id_insegnante FROM insegnante WHERE LOWER(insegnante.username) LIKE LOWER('$user') AND insegnante.password LIKE '$pass'";
+  $result=$mysqli->query($sql);
+  $data=$result->fetch_all();
+  $result->free();
+  $mysqli->close();
+
+  if($data!=null)
+  {
+    return $data[0][0];
+  }
+  else
+  {
+    return -1;
+  }
+}
+
+function log_studente($user, $pass){
+  $mysqli=db_connect();
+  $sql="SELECT studente.id_studente FROM studente WHERE LOWER(studente.username) LIKE LOWER('$user') AND studente.password LIKE '$pass'";
+  $result=$mysqli->query($sql);
+  $data=$result->fetch_all();
+  $result->free();
+  $mysqli->close();
+
+  if($data!=null)
+  {
+    return $data[0][0];
+  }
+  else
+  {
+    return -1;
+  }
+}
+
+// ---------------------------------- CLASSE ----------------------------------
+
+function classi_sel_all(){
+  $mysqli=db_connect();
+  $sql="SELECT * FROM classe ";
+  $result=$mysqli->query($sql);
+  $data=$result->fetch_all(MYSQLI_ASSOC);
+  $result->free();
+  $mysqli->close();
+  return $data;
+}
+
+function classi_del_prof($id){
+  $mysqli=db_connect();
+  $sql="SELECT appartenenza.coordinatore, appartenenza.id_insegnante, appartenenza.id_classe, classe.numero, classe.sezione FROM appartenenza INNER JOIN classe ON appartenenza.id_classe = classe.id_classe WHERE appartenenza.id_insegnante = $id";
+  $result=$mysqli->query($sql);
+  $data=$result->fetch_all();
+  $result->free();
+  $mysqli->close();
+  return $data;
+
+}
+
+function classe_from_name($str){  
   $a = $str[0];
   $b = $str[1];
   $mysqli=db_connect();
@@ -322,7 +326,6 @@ function classe($str){
   }
 }
 
-
 function classe_from_id($id){
   $mysqli=db_connect();
   $sql="SELECT classe.numero, classe.sezione FROM classe WHERE classe.id_classe = $id";
@@ -333,85 +336,93 @@ function classe_from_id($id){
   return strval($data[0][0]).strtoupper(strval($data[0][1]));
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function nazioni_sel_all(){
+function classe_sel_studenti($id){
+  //
   $mysqli=db_connect();
-  $sql="SELECT * FROM country ORDER BY Name";
+  $sql="SELECT studente.id_studente, studente.nome, studente.cognome FROM studente INNER JOIN classe ON studente.id_classe = classe.id_classe WHERE classe.id_classe = $id";
   $result=$mysqli->query($sql);
-  $data=$result->fetch_all(MYSQLI_ASSOC);
+  $data=$result->fetch_all();
   $result->free();
   $mysqli->close();
   return $data;
 }
-function nazioni_sel_all_lin(){
+
+// ---------------------------------- PROFESSORE ----------------------------------
+
+function materie_del_prof_nella_classe($id_prof, $id_classe){
   $mysqli=db_connect();
-  $sql="SELECT c.Code, c.Name, c.Continent, COUNT(l.CountryCode) AS LanguagesNum FROM country c INNER 
-  JOIN countrylanguage l ON c.Code=l.CountryCode GROUP BY l.CountryCode ORDER BY c.Name";
+  $sql="SELECT materia.id_materia, materia.nome FROM materia WHERE materia.id_materia IN (SELECT insegnamento.id_materia FROM appartenenza INNER JOIN insegnamento ON appartenenza.id_insegnante = insegnamento.id_insegnante WHERE appartenenza.id_insegnante = 40 AND appartenenza.id_classe = 1)";
   $result=$mysqli->query($sql);
-  $data=$result->fetch_all(MYSQLI_ASSOC);
+  $data=$result->fetch_all();
   $result->free();
   $mysqli->close();
   return $data;
 }
-// Seleziona comparando a una srtringa
-function nazioni_sel_filt($filt){
+
+function materia_by_id($id){
   $mysqli=db_connect();
-  $sql="SELECT * FROM country WHERE Name like '%$filt%' ORDER BY Name";
+  $sql="SELECT materia.nome FROM materia WHERE materia.id_materia = $id";
   $result=$mysqli->query($sql);
-  $data=$result->fetch_all(MYSQLI_ASSOC);
+  $data=$result->fetch_all();
+  $result->free();
+  $mysqli->close();
+  return $data[0];
+}
+
+
+function voti($id_std, $id_mat){
+  $mysqli=db_connect();
+  $sql="SELECT * FROM `voto` WHERE voto.id_studente = $id_std AND voto.id_materia = $id_mat";
+  $result=$mysqli->query($sql);
+  $data=$result->fetch_all();
   $result->free();
   $mysqli->close();
   return $data;
 }
-function nazioni_sel_filt_lin($filt){
+
+//
+function nome_std($id_std){
   $mysqli=db_connect();
-  $sql="SELECT c.Code, c.Name, c.Continent, COUNT(l.CountryCode) AS LanguagesNum FROM country c INNER 
-  JOIN countrylanguage l ON c.Code=l.CountryCode GROUP BY l.CountryCode HAVING c.Name like '%$filt%' ORDER BY c.Name";
+  $sql="SELECT CONCAT ( studente.nome, ' ' ,studente.cognome) FROM `studente` WHERE studente.id_studente = $id_std";
   $result=$mysqli->query($sql);
-  $data=$result->fetch_all(MYSQLI_ASSOC);
+  $data=$result->fetch_all();
   $result->free();
   $mysqli->close();
-  return $data;
+  return $data[0];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // aggiorna
 function nazioni_mod_id($oldcode, $code, $name, $cont){
   $mysqli=db_connect();

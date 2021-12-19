@@ -1,8 +1,8 @@
 <?php 
-include('template_header_pub.php');
+include('template/template_header_pub.php');
 include('dal.php');
 $id = $_GET['id_classe'];
-$cls = classe_from_id($id)
+$cls = classe_from_id($id);
 ?>
 
 <p class="intestazione">Scuola ISII Marconi - Classe <?=$cls?></p>
@@ -70,4 +70,4 @@ $arr=mesi_cls($id);
     </table>
 </div>
 
-<?php include('template_footer.php');?>
+<?php include('template/template_footer.php');?>

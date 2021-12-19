@@ -1,5 +1,5 @@
 <?php 
-include('template_header_pub_nonav.php');
+include('template/template_header_pub_nonav.php');
 include('dal.php');
 ?>
 
@@ -7,4 +7,4 @@ include('dal.php');
 <p class="centered"><a href="index.php" class="btn">Torna alla Home Page</a></p>
 
 
-<?php include('template_footer.php');?>
+<?php include('template/template_footer.php');?>

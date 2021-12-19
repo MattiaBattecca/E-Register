@@ -1,5 +1,5 @@
 <?php 
-include('template_header_pub.php');
+include('template/template_header_pub.php');
 include('dal.php');
 ?>
 
@@ -68,4 +68,4 @@ $arr=mesi();
     </table>
 </div>
 
-<?php include('template_footer.php');?>
+<?php include('template/template_footer.php');?>
