@@ -369,7 +369,6 @@ function materia_by_id($id){
   return $data[0];
 }
 
-
 function voti($id_std, $id_mat){
   $mysqli=db_connect();
   $sql="SELECT * FROM `voto` WHERE voto.id_studente = $id_std AND voto.id_materia = $id_mat";
@@ -380,7 +379,8 @@ function voti($id_std, $id_mat){
   return $data;
 }
 
-//
+// ---------------------------------- STUDENTE ----------------------------------
+
 function nome_std($id_std){
   $mysqli=db_connect();
   $sql="SELECT CONCAT ( studente.nome, ' ' ,studente.cognome) FROM `studente` WHERE studente.id_studente = $id_std";
@@ -391,7 +391,25 @@ function nome_std($id_std){
   return $data[0];
 }
 
+function mat(){
+  $mysqli=db_connect();
+  $sql="SELECT * FROM `materia`";
+  $result=$mysqli->query($sql);
+  $data=$result->fetch_all();
+  $result->free();
+  $mysqli->close();
+  return $data;
+}
 
+function voti_std_mat($id_std, $id_mat){
+  $mysqli=db_connect();
+  $sql="SELECT * FROM voto WHERE voto.id_studente = $id_std AND voto.id_materia = $id_mat";
+  $result=$mysqli->query($sql);
+  $data=$result->fetch_all();
+  $result->free();
+  $mysqli->close();
+  return $data;
+}
 
 
 

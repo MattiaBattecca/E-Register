@@ -10,8 +10,9 @@ $std = nome_std($id_std);
  
 <div class="container" id="cerca_classe" ">
     <h2>Voti <?=$mat[0]?> - <?=$std[0]?></h2> 
+    <a href="" class="btn">Inserisci</a>
         <?php foreach($voti as $record){ ?>
-            <?=$record[1]?><hr>
+            <a class="btnsmall"> <?=$record[1]?></a><hr>
         <?php } ?>
 
 </div>

@@ -1,7 +1,10 @@
 <?php
 include('dal.php');
 
-$classe = $_GET['cerca_classe'];
+$classe = $_GET['classe'];
+
+echo($classe);
+
 if(strlen($classe)==2){
     $id = classe_from_name($classe);
     if($id >= 0){
