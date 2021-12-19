@@ -7,7 +7,7 @@ $cls = classe_from_id($id);
 
 <p class="intestazione">Scuola ISII Marconi - Classe <?=$cls?></p>
 
-<div class="container" id="cerca_classe">
+<div class="container" id="Cerca">
     <h2>Cerca una classe</h2>
     <form method="get" action="cerca_act.php">
         <input name="classe" id="classe" placeholder="Cerca una classe...">

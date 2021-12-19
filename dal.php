@@ -411,13 +411,42 @@ function voti_std_mat($id_std, $id_mat){
   return $data;
 }
 
+// ---------------------------------- VOTO ----------------------------------
+
+function add_voto($id_std, $id_mat, $id_prof, $desc, $value){
+  $dat = date("Y-m-d");
+  if($desc == ''){
+    $sql="INSERT INTO voto (voto.id_voto, voto.valore, voto.data, voto.descrizione, voto.id_studente, voto.id_materia, voto.id_insegnante) VALUES (NULL,$value, '$dat', NULL,$id_std, $id_mat, $id_prof)";
+  }
+  else{
+    $sql="INSERT INTO voto (voto.id_voto, voto.valore, voto.data, voto.descrizione, voto.id_studente, voto.id_materia, voto.id_insegnante) VALUES (NULL,$value, '$dat', $desc,$id_std, $id_mat, $id_prof)";
+  }
+  $mysqli=db_connect();
+  $mysqli->query($sql);
+  $mysqli->close();  
+}
+
+function edit_voto($id_std, $id_mat, $id_prof, $desc, $value, $id_voto){
+  $dat = date("Y-m-d");
+  if($desc == ''){
+    $sql="UPDATE voto SET voto.id_voto= $id_voto, voto.valore=$value, voto.data='$dat', voto.descrizione=NULL, voto.id_studente=$id_std, voto.id_materia=$id_mat, voto.id_insegnante=$id_prof WHERE voto.id_voto = $id_voto";
+  }
+  else{
+    $sql="UPDATE voto SET voto.id_voto= $id_voto, voto.valore=$value, voto.data='$dat', voto.descrizione=$desc, voto.id_studente=$id_std, voto.id_materia=$id_mat, voto.id_insegnante=$id_prof WHERE voto.id_voto = $id_voto";
+  }
+  $mysqli=db_connect();
+  $mysqli->query($sql);
+  $mysqli->close(); 
+
+}
 
 
-
-
-
-
-
+function delete_voto($id_voto){
+  $sql="DELETE FROM voto WHERE voto.id_voto = $id_voto";
+  $mysqli=db_connect();
+  $mysqli->query($sql);
+  $mysqli->close(); 
+}
 
 
 

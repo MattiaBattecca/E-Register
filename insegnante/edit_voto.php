@@ -4,11 +4,12 @@ include('../dal.php');
 $id_std =  $_GET["id_std"];
 $id_mat =  $_GET["id_mat"];
 $id_prof = $_GET["id_prof"];
+$id_voto = $_GET["id_voto"];
 ?>
  
 <div class="container" id="cerca_classe" >
-    <h2>Inserisci voto</h2> 
-    <form method="post" action="inserisci_voto_act.php?id_prof=<?=$id_prof?>&id_mat=<?=$id_mat?>&id_std=<?=$id_std?>">
+    <h2>Modifica voto</h2> 
+    <form method="post" action="edit_voto_act.php?id_prof=<?=$id_prof?>&id_mat=<?=$id_mat?>&id_std=<?=$id_std?>&id_voto=<?=$id_voto?>">
         <p>  
             Voto:<br/><br/>
             <div class="search_categories">
@@ -59,14 +60,15 @@ $id_prof = $_GET["id_prof"];
             Descrizione:<br/><br/>
 
             <input name="desc" id="desc" placeholder="Inserisci una descrizione..."><br/>
-            <input type="submit" class="btn" value="Inserisci voto">
+            <input type="submit" class="btn" value="Modifica voto">
             
         </p> 
     </form>
 </div>
-
-
-
+<div class="container" id="cerca_classe" >
+    <h2>Elimina voto</h2> 
+    <a href="delete_voto_act.php?id_prof=<?=$id_prof?>&id_mat=<?=$id_mat?>&id_std=<?=$id_std?>&id_voto=<?=$id_voto?>" class="btn">Elimina</a>
+</div>
 <?php
 include('../template/template_footer.php');
 ?>

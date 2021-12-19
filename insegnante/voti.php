@@ -21,7 +21,7 @@ $mat = materia_by_id($id_mat);
         <tr>
             <td><?=$record[1]?></td>
             <td><?=$record[2]?></td>
-            <td><a class="btnsmall" href="situazione_studente.php?id=<?=$record[0]?>&materia=<?=$id_mat?>">Visualizza</a></td>
+            <td><a class="btnsmall" href="situazione_studente.php?id_prof=<?=$id_prof?>&id_std=<?=$record[0]?>&id_mat=<?=$id_mat?>">Visualizza</a></td>
         </tr> 
         <?php } ?>
     </table>
